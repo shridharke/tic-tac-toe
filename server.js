@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 app.set('view engine', 'ejs');
 app.use(sessions({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    secret: "mysecretkey",
     saveUninitialized:true,
     resave: false
 }));

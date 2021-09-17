@@ -1,10 +1,14 @@
 const startButton = document.getElementById('startGame');
 const modeContainer = document.getElementById('modeContainer');
 const closeButton = document.getElementById('closeButton');
-const hardSelect = document.getElementById('hardSelect');
 const easySelect = document.getElementById('easySelect');
+const mediumSelect = document.getElementById('mediumSelect');
+const hardSelect = document.getElementById('hardSelect');
+const manualSelect = document.getElementById('manualSelect');
 
 let scores;
+let player;
+let level;
 
 startButton.addEventListener('click', () => {
     modeContainer.style.visibility = 'visible';
@@ -17,12 +21,30 @@ closeButton.addEventListener('click', () => {
 easySelect.addEventListener('click', () => {
     modeContainer.style.visibility = 'hidden';
     scores=[10,-10,0];
+    level=1;
+    currentPlayer='X';
     onStartGame();
+})
+
+mediumSelect.addEventListener('click', () => {
+    modeContainer.style.visibility='hidden';
+    level=2;
+    currentPlayer='X';
+    onStartGame()
 })
 
 hardSelect.addEventListener('click', () => {
     modeContainer.style.visibility = 'hidden';
     scores=[-10,10,0];
+    level=3;
+    currentPlayer='X';
+    onStartGame();
+})
+
+manualSelect.addEventListener('click', () => {
+    modeContainer.style.visibility = 'hidden';
+    level=4;
+    currentPlayer='X';
     onStartGame();
 })
 
@@ -52,31 +74,53 @@ function onStartGame() {
     for (let i = 0; i < cells.length; i++) {
         cells[i].innerText = '';
         cells[i].style.removeProperty('background-color');
-        cells[i].addEventListener('click', onTurnClick, { once:true });
+        cells[i].addEventListener('click', onTurnClick);
+        cells[i].addEventListener('mouseover', onCellMouseOver);
+        cells[i].addEventListener('mouseout', onCellMouseOut);
     }
+}
+
+function onCellMouseOver(e){
+    const { id: squareId } = e.target;
+    cells[squareId].innerText=currentPlayer;
+    cells[squareId].style.color = 'rgba(0,0,0,0.3)';
+}
+
+function onCellMouseOut(e){
+    const { id: squareId } = e.target;
+    cells[squareId].innerText='';
 }
 
 function onTurnClick(e) {
     const { id: squareId } = e.target;
-    if (typeof origBoard[squareId] === 'number') {
-        onTurn(squareId, HUMAN_PLAYER);
-        if (!onCheckGameTie()) {
-            onTurn(getCurrentSpot(), AI_PLAYER);
+    onTurn(squareId, currentPlayer);
+    playerSwitch();
+    if(level!==4){
+        let currentSpot = getCurrentSpot();
+        if(currentSpot || currentSpot===0){
+            onTurn(currentSpot, currentPlayer);
+            playerSwitch();
         }
-    } else {
-        const message = 'That spot is already taken, click somewhere else';
-        alert(message);
+    }
+}
+
+function playerSwitch(){
+    if(currentPlayer==='X'){
+        currentPlayer='O';
+    } else if(currentPlayer==='O'){
+        currentPlayer='X';
     }
 }
 
 function onTurn(squareId, player) {
-    origBoard[squareId] = player;
     console.log(squareId);
+    cells[squareId].style.color='black';
+    cells[squareId].removeEventListener('click', onTurnClick);
+    cells[squareId].removeEventListener('mouseout', onCellMouseOut);
+    cells[squareId].removeEventListener('mouseover', onCellMouseOver);
+    origBoard[squareId] = player;
     document.getElementById(squareId).innerText = player;
-    let isGameWon = onCheckWin(origBoard, player);
-    if (isGameWon) {
-        onGameOver(isGameWon);
-    }
+    onCheckGameTie(player);
 }
 
 function onCheckWin(board, player) {
@@ -100,6 +144,8 @@ function onGameOver({ index, player }) {
     }
     for (let i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', onTurnClick);
+        cells[i].removeEventListener('mouseout', onCellMouseOut);
+        cells[i].removeEventListener('mouseover', onCellMouseOver);
     }
 
     const result = player === HUMAN_PLAYER ? 'You Win' : 'You Lose';
@@ -120,16 +166,17 @@ function onDeclareWinner(res) {
     resultContainer.innerText = res;
 }
 
-function onCheckGameTie() {
-    if (emptySquares().length === 0) {
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].style.backgroundColor = 'rgba(108, 117, 125, 0.5)';
-            cells[i].removeEventListener('click', onTurnClick);
-        }
-        onDeclareWinner('A Tie');
-        return true;
+function onCheckGameTie(player) {
+    let isGameWon = onCheckWin(origBoard, player);
+    if (isGameWon) {
+        onGameOver(isGameWon);
     } else {
-        return false;
+        if (emptySquares().length === 0) {
+            for (let i = 0; i < cells.length; i++) {
+                cells[i].style.backgroundColor = 'rgba(108, 117, 125, 0.5)';
+            }
+            onDeclareWinner('A Tie');
+        }
     }
 }
 
@@ -158,7 +205,6 @@ function minimax(newBoard, player) {
         let move = {};
         move.index = newBoard[availableSpots[i]];
         newBoard[availableSpots[i]] = player;
-
         if (player === AI_PLAYER) {
             let result = minimax(newBoard, HUMAN_PLAYER);
             move.score = result.score;
@@ -166,7 +212,6 @@ function minimax(newBoard, player) {
             let result = minimax(newBoard, AI_PLAYER);
             move.score = result.score;
         }
-
         newBoard[availableSpots[i]] = move.index;
         moves.push(move);
     }
@@ -190,6 +235,5 @@ function minimax(newBoard, player) {
             }
         }
     }
-
     return moves[bestMove];
 }
