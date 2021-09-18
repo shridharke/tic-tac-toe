@@ -1,6 +1,28 @@
 [
   {
     "username": "shri",
-    "password": "1"
+    "password": "1",
+    "games": [
+      {
+        "result": 1,
+        "mode": 4,
+        "date": "18 Sep 2021 - 12:27 PM",
+        "time": 6,
+        "moves": [3, 2, 5, 4, 7, 8, 0, 1, 6]
+      }
+    ]
+  },
+  {
+    "username": "shridhar",
+    "password": "1234",
+    "games": [
+      {
+        "result": -1,
+        "mode": 3,
+        "date": "09/17/2021, 01:57 PM",
+        "time": 2,
+        "moves": [3, 0, 4, 5, 7, 1, 8, 2]
+      }
+    ]
   }
 ]

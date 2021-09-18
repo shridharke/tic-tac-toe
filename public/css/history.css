@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+section h1 {
+  font-size: 5em;
+  margin-bottom: 30px;
+}
+
+section h2 {
+  margin-bottom: 20px;
+}
+
+section h3 {
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  color: black;
+  font-weight: 500;
+}
+
+section button {
+  width: 200px;
+  height: 40px;
+  font-size: 1em;
+  color: black;
+  border-radius: 0;
+  border: none;
+  font-weight: 500;
+  background-color: #c4c4c4;
+}
+
+section button:hover {
+  background-color: #757575;
+}
+
+aside {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.test {
+  height: 75%;
+  width: 75%;
+}
+
+.game {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.cell {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.cell:nth-of-type(1),
+.cell:nth-of-type(2),
+.cell:nth-of-type(3) {
+  border-top: none;
+}
+
+.cell:nth-of-type(1),
+.cell:nth-of-type(4),
+.cell:nth-of-type(7) {
+  border-left: none;
+}
+
+.cell:nth-of-type(3),
+.cell:nth-of-type(6),
+.cell:nth-of-type(9) {
+  border-right: none;
+}
+
+.cell:nth-of-type(7),
+.cell:nth-of-type(8),
+.cell:nth-of-type(9) {
+  border-bottom: none;
+}
+
+#historyContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 2;
+  line-height: 1.25;
+  background-color: #191919;
+}
+
+.history {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.history h1 {
+  font-size: 4em;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+tbody {
+  display: block;
+}
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+thead {
+  width: calc(100% - 1em);
+}
+table {
+  width: 400px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table th,
+table td {
+  padding: 13px;
+  text-align: center;
+}
+
+table th {
+  font-size: 1em;
+  border-bottom: 2px solid white;
+}
+
+tbody {
+  height: 350px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.close-button {
+  width: 200px;
+  height: 40px;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  margin-top: 30px;
+}
+
+tbody tr:hover {
+  background-color: #333;
+}
+
+tbody tr {
+  border-bottom: 1px solid #444;
+}
+
+.result-data1 {
+  color: #04bd00;
+}
+
+.result-data-1 {
+  color: #c80202;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
