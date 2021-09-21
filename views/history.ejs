@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="history.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="css/history.css" />
+    <link rel="icon" type="image/png" href="img/icon.png" />
+    <script type="text/javascript">
+      var GAME_DATA = '<%- data %>';
+    </script>
+  </head>
+  <body>
+    <!-- Replay Section -->
     <main>
-        <h1>Game History</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Date & Time</th>
-                    <th>Mode</th>
-                    <th>Game Time</th>
-                    <th>Result</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>X</td>
-                    <td>15 Sep 2021 - 11: 05 AM</td>
-                    <td>Easy</td>
-                    <td>34s</td>
-                    <td>Win</td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>15 Sep 2021 - 12: 15 AM</td>
-                    <td>Medium</td>
-                    <td>34s</td>
-                    <td>Win</td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>15 Sep 2021 - 11: 05 AM</td>
-                    <td>Impossible</td>
-                    <td>34s</td>
-                    <td>Tie</td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>15 Sep 2021 - 11: 05 AM</td>
-                    <td>Easy</td>
-                    <td>34s</td>
-                    <td>Lost</td>
-                </tr>
-            </tbody>
-        </table>
-        <button onclick="location.href='/'" type="button" class="close-button">X Close</button>
+      <!-- Header and Game Details -->
+      <section class="column">
+        <h1>Tic Tac Toe</h1>
+        <h2>Replay</h2>
+        <h3 id="dateTime" class="dateTime">
+          <b>Date & Time:</b> 09/17/2021, 01:57 PM
+        </h3>
+        <h3 id="mode" class="mode"><b>Mode:</b> Easy</h3>
+        <h3 id="timeTaken" class="timeTaken"><b>Time:</b> 3s</h3>
+        <h3 id="result" class="result"><b>Result:</b> Won</h3>
+        <button id="closeReplay">Close Replay</button>
+      </section>
+      <!-- Game Replay Board -->
+      <aside class="column">
+        <div class="test">
+          <div class="game">
+            <div class="board">
+              <div class="cell" id="0"></div>
+              <div class="cell" id="1"></div>
+              <div class="cell" id="2"></div>
+              <div class="cell" id="3"></div>
+              <div class="cell" id="4"></div>
+              <div class="cell" id="5"></div>
+              <div class="cell" id="6"></div>
+              <div class="cell" id="7"></div>
+              <div class="cell" id="8"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
     </main>
-</body>
+    <!-- Game History Section -->
+    <div id="historyContainer">
+      <div class="history" id="history">
+        <h1>Game History</h1>
+        <!-- Table of All Previous Games Played by User -->
+        <table id="table">
+          <thead id="tableHead">
+            <tr>
+              <th></th>
+              <th>Date & Time</th>
+              <th>Mode</th>
+              <th>Game Time</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <button onclick="location.href='/'" type="button" class="close-button">
+          X Close
+        </button>
+      </div>
+    </div>
+    <script src="js/history.js"></script>
+  </body>
 </html>

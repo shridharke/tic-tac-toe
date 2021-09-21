@@ -1,9 +1,11 @@
+// Importing Requires Modules
 const express = require('express');
-const fs = require('fs');
 const sessions = require('express-session');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
+const { saveGame, findIfExists, addUser, getData, validateUser } = require('./fileHandler');
 
+// Initialising Modules
 const app = express();
 app.set('view engine', 'ejs');
 app.use(sessions({
@@ -18,7 +20,9 @@ app.use(cookieParser())
 app.use(flash())
 
 var session;
+var PORT = 3000;
 
+// Home Route renders Dashboard if already logged in or redirects to login page
 app.get('/', (req,res) => {
     session=req.session;
     if(session.userid){
@@ -28,10 +32,17 @@ app.get('/', (req,res) => {
     }
 })
 
+// Login User Page
 app.get('/login',(req,res) => {
-    res.render('login.ejs')
+    session=req.session;
+    if(session.userid){
+        res.redirect('/')
+    }else{
+        res.render('login.ejs')
+    }
 })
 
+// Login Post method for validating user and logging in
 app.post('/login', (req,res) => {
     if(validateUser(req.body.username, req.body.password)){
         session=req.session;
@@ -44,19 +55,17 @@ app.post('/login', (req,res) => {
     }
 })
 
-function validateUser(user, pass) {
-    const array = getData();
-    if(array.find(x => x.username === user && x.password === pass)){
-        return true
-    } else {
-        return false
-    }
-}
-
+// Register User Page
 app.get('/register',(req,res) => {
-    res.render('register.ejs')
+    session=req.session;
+    if(session.userid){
+        res.redirect('/')
+    }else{
+        res.render('register.ejs')
+    }
 })
 
+// Register method for registering user if not present already
 app.post('/register', (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -70,39 +79,33 @@ app.post('/register', (req,res) => {
     }
 })
 
-function getData() {
-    let val;
-    try {
-        const test = fs.readFileSync('./public/data.json');
-        val = JSON.parse(test);
-    } catch (err) {
-        console.log(err);
-    }
-    return val;
-}
-
-function addUser(username, password,array) {
-    array.push({username: username,password: password});
-    fs.writeFile('./public/data.json', JSON.stringify(array,null,2), err => {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log('Written Sucessfully');
-        }
-    })
-}
-
-function findIfExists(user,array) {
-    return array.find(x => x.username === user)
-}
-
-app.get('/history', (req,res) => {
-    res.render('history.ejs');
+// Saves Game data for getting historical data
+app.post('/savegame', (req,res) => {
+    const details = req.body;
+    const uname = req.session.userid;
+    const array = getData();
+    saveGame(array, uname,details);
+    res.send('testing');
 })
 
+// History page for showing Game History
+app.get('/history', (req,res) => {
+    session=req.session;
+    if(session.userid){
+        const array = getData();
+        let user = array.find(x => x.username===session.userid);
+        res.render('history.ejs', {data: JSON.stringify(user)});
+    }else{
+        res.redirect('/login')
+    }
+})
+
+// Log Out current session
 app.get('/logout', (req,res) => {
     req.session.destroy();
     res.redirect('/login');
 })
 
-app.listen(3000);
+app.listen(process.env.PORT || PORT, () => {
+    console.log(`Listening on Port: ${PORT}`);
+});
