@@ -205,6 +205,7 @@ confirmYes.addEventListener('click', () => {
   });
   selectedRows = [];
   checkAll.checked = false;
+  deleteButton.disabled = true;
   deleteDialog.close();
   deleteInServer();
   initializeHistory();

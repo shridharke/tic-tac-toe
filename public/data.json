@@ -2,37 +2,7 @@
   {
     "username": "shri",
     "password": "1",
-    "games": [
-      {
-        "result": -1,
-        "mode": 2,
-        "date": "21 Sep 2021 - 02:45 PM",
-        "time": 2,
-        "moves": [
-          3,
-          8,
-          7,
-          2,
-          5,
-          0,
-          1,
-          4
-        ]
-      },
-      {
-        "result": 1,
-        "mode": 1,
-        "date": "21 Sep 2021 - 02:31 PM",
-        "time": 1,
-        "moves": [
-          3,
-          1,
-          4,
-          0,
-          5
-        ]
-      }
-    ]
+    "games": []
   },
   {
     "username": "shridhar",
