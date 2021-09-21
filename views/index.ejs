@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <main>
+        <section class="column">
+            <h1>Tic Tac Toe</h1>
+            <button id="startGame">Start Game</button>
+            <button onclick="location.href='/history'" type="button">Game History</button>
+            <button onclick="location.href='/logout'" type="button">Log Out</button>
+        </section>
+        <aside class="column">
+            <div class="test">
+                <div class="game">
+                    <div class="board">
+                        <div class="cell" id="0">X</div>
+                        <div class="cell" id="1">X</div>
+                        <div class="cell" id="2">O</div>
+                        <div class="cell" id="3">X</div>
+                        <div class="cell" id="4">X</div>
+                        <div class="cell" id="5">O</div>
+                        <div class="cell" id="6">X</div>
+                        <div class="cell" id="7">O</div>
+                        <div class="cell" id="8">O</div>
+                    </div>
+                </div>
+            </div>
+            <div class="result" id="result">You Win!</div>
+        </aside>
+    </main>
+    <div class="mode-container" id="modeContainer">
+        <h1>Select Mode</h1>
+        <button id="easySelect">Easy</button>
+        <button id="mediumSelect">Medium</button>
+        <button id="hardSelect">Impossible</button>
+        <button id="manualSelect">Manual</button>
+        <button id="closeButton">X Close</button>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
