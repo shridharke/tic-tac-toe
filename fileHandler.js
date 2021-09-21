@@ -24,7 +24,7 @@ function validateUser(user, pass) {
  */
 function addUser(username, password, array) {
   array.push({ username: username, password: password, games: [] });
-  fs.writeFile('./public/data.json', JSON.stringify(array, null, 2), (err) => {
+  fs.writeFile('./data.json', JSON.stringify(array, null, 2), (err) => {
     if (err) {
       console.log(err);
     }
@@ -38,7 +38,7 @@ function addUser(username, password, array) {
 function getData() {
   let val;
   try {
-    const test = fs.readFileSync('./public/data.json');
+    const test = fs.readFileSync('./data.json');
     val = JSON.parse(test);
   } catch (err) {
     console.log(err);
@@ -69,7 +69,7 @@ function saveGame(array, username, details) {
       return true;
     }
   });
-  fs.writeFile('./public/data.json', JSON.stringify(array, null, 2), (err) => {
+  fs.writeFile('./data.json', JSON.stringify(array, null, 2), (err) => {
     if (err) {
       console.log(err);
     }
@@ -83,15 +83,11 @@ function deleteGame(array, username, games) {
       return true;
     }
   });
-  fs.writeFileSync(
-    './public/data.json',
-    JSON.stringify(array, null, 2),
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
+  fs.writeFileSync('./data.json', JSON.stringify(array, null, 2), (err) => {
+    if (err) {
+      console.log(err);
     }
-  );
+  });
 }
 
 // Exporting Functions as a Module
