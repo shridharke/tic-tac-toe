@@ -1,29 +1,21 @@
-# README #
+# SDLC Assignment
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is a part of SDLC Assignment.
 
-### What is this repository for? ###
+# Tic Tac Toe App
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+An Application to play Tic Tac Toe Game.
 
-### How do I get set up? ###
+## Description
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+The Application lets users play Tic Tac Toe Game in 3 different levels. It also lets users login and register and can keep track of all the games played before and replay them and watch the moves made in the game.
 
-### Contribution guidelines ###
+## Website Screenshot
 
-* Writing tests
-* Code review
-* Other guidelines
+Homepage
 
-### Who do I talk to? ###
+![homepage](assets/homepage.png)
 
-* Repo owner or admin
-* Other community or team contact
+History Page
+
+![homepage](assets/historypage.png)

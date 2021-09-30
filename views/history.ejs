@@ -7,9 +7,6 @@
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="css/history.css" />
     <link rel="icon" type="image/png" href="img/icon.png" />
-    <script type="text/javascript">
-      var GAME_DATA = '<%- data %>';
-    </script>
   </head>
   <body>
     <!-- Replay Section -->
@@ -53,18 +50,33 @@
         <table id="table">
           <thead id="tableHead">
             <tr>
-              <th></th>
-              <th>Date & Time</th>
-              <th>Mode</th>
-              <th>Game Time</th>
-              <th>Result</th>
+              <th class="col-delete">
+                <input type="checkbox" name="check" id="check-head" />
+              </th>
+              <th class="col-replay">Replay</th>
+              <th class="col-date">Date & Time</th>
+              <th class="col-mode">Mode</th>
+              <th class="col-time">Game Time</th>
+              <th class="col-result">Result</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
         </table>
-        <button onclick="location.href='/'" type="button" class="close-button">
-          X Close
-        </button>
+        <div>
+          <button class="buttons" disabled id="deleteButton">
+            Delete Selected
+          </button>
+          <button onclick="location.href='/'" type="button" class="buttons">
+            X Close
+          </button>
+        </div>
+        <dialog class="delete-dialog" id="deleteDialog">
+          <p>Are you sure you want to delete selected items?</p>
+          <div>
+            <button class="confirm-button" id="confirmYes">Yes</button>
+            <button class="confirm-button" id="confirmNo">No</button>
+          </div>
+        </dialog>
       </div>
     </div>
     <script src="js/history.js"></script>

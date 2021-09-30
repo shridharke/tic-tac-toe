@@ -150,15 +150,18 @@ aside {
 tbody {
   display: block;
 }
+
 thead,
 tbody tr {
   display: table;
   width: 100%;
   table-layout: fixed;
 }
+
 thead {
   width: calc(100% - 1em);
 }
+
 table {
   width: 400px;
 }
@@ -173,7 +176,7 @@ table {
 
 table th,
 table td {
-  padding: 13px;
+  padding: 15px 10px;
   text-align: center;
 }
 
@@ -188,7 +191,7 @@ tbody {
   overflow-y: auto;
 }
 
-.close-button {
+.buttons {
   width: 200px;
   height: 40px;
   font-size: 1em;
@@ -215,6 +218,24 @@ tbody tr {
   color: #c80202;
 }
 
+.col-delete,
+.col-replay {
+  width: 12%;
+}
+
+.col-date {
+  width: 25%;
+}
+
+.buttons:disabled {
+  visibility: hidden;
+}
+
+.buttons:hover {
+  color: black;
+  background-color: white;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -233,47 +254,25 @@ tbody tr {
   background: #555;
 }
 
-@media screen and (max-width: 600px) {
-  table {
-    border: 0;
-  }
+dialog {
+  margin: 0 auto;
+  padding: 15px;
+  font-size: 1.2em;
+  border-color: white;
+  background-color: #303030;
+  color: white;
+}
 
-  table caption {
-    font-size: 1.3em;
-  }
+.confirm-button {
+  border: 2px solid white;
+  color: white;
+  background-color: #303030;
+  width: 80px;
+  height: 35px;
+  margin-top: 15px;
+}
 
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: 0.625em;
-  }
-
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: 0.8em;
-    text-align: right;
-  }
-
-  table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  table td:last-child {
-    border-bottom: 0;
-  }
+.confirm-button:hover {
+  color: #303030;
+  background-color: white;
 }
